@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #container{
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 50px;
+            height: 50px;
+        }
+        #container img{
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            right: 0;
+            bottom: 0;
+            -webkit-transition: transform 1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <img class="menu" src="6_xuanzhuananniu/close.png" alt=""/>
+        <img class="menu" src="6_xuanzhuananniu/full.png" alt=""/>
+        <img class="menu" src="6_xuanzhuananniu/open.png" alt=""/>
+        <img class="menu" src="6_xuanzhuananniu/prev.png" alt=""/>
+        <img class="menu" src="6_xuanzhuananniu/refresh.png" alt=""/>
+        <img id="home" src="6_xuanzhuananniu/home.png" alt=""/>
+    </div>
+    <script>
+        var oHome = document.getElementById('home');
+        var aMenu = document.getElementsByClassName('menu');
+        var aFlag=false;
+            oHome.onclick=function() {
+                if (!aFlag) {
+                    oHome.style.webkitTransform = "rotate(360deg)";
+                    for (var i = 0; i < aMenu.length; i++) {
+                        var x = -180 * Math.sin(22.5 * i * Math.PI / 180);
+                        var y = -180 * Math.cos(22.5 * i * Math.PI / 180);
+                        aMenu[i].style.webkitTransform = "translate(" + x + "px," + y + "px) rotateZ(360deg)";
+                    }
+                }
+                else {
+                    for (var i = 0; i < aMenu.length; i++) {
+                        aMenu[i].style.webkitTransform = "translate(0,0) rotateZ(0)";
+                    }
+                    oHome.style.webkitTransform = "rotate(0)";
+                }
+                    aFlag = !aFlag;
+            };
+        for(var i=0;i<aMenu.length;i++){
+            aMenu[i].isClick=false;
+            aMenu[i].onclick=function(){
+                if(!this.isClick){
+                    this.isClick=true;
+                    var currentTransform=this.style.webkitTransform;
+                    this.style.webkitTransitionDuration='0.3s';
+                    this.style.webkitTransform=currentTransform+'scale(1.5)';
+                    var fn=function(){
+                        this.style.webkitTransform=currentTransform;
+                        this.removeEventListener('webkitTransitionEnd',fn);
+                        this.isClick=false;
+                    };
+                    this.addEventListener('webkitTransitionEnd',fn,false);
+                }
+            };
+        }
+    </script>
+</body>
+</html>
