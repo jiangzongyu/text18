@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body{
+            height: 100%;
+        }
+        *{
+            margin: 0;
+            height: 0;
+        }
+        #container{
+            height: 100%;
+            width: 100%;
+            background: url("8_xuanzhuanpicture/bg.jpg");
+        }
+        .img{
+            width: 125px;
+            height: 125px;
+            position: absolute;
+            border: 5px solid white;
+            left: -150px;
+            top: -150px;
+            -webkit-transition: all 1s ease;
+        }
+        span{
+            width: 125px;
+            height: 125px;
+            position: absolute;
+            //background: red;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+
+    </div>
+    <script>
+        var oContainer = document.getElementById('container');
+        var num=0;
+        for(var i=0;i<24;i++){
+            var aImg = new Image();
+            aImg.onload=function(){
+                num++;
+                if(num==48){
+                    landScuess();
+                }
+            }
+            aImg.src="8_xuanzhuanpicture/"+(i+1)+".jpg";
+        }
+        for(var i=0;i<24;i++){
+            var aImg = new Image();
+            aImg.onload=function(){
+                num++;
+                if(num==48){
+                    loadScuess();
+                }
+            }
+            aImg.src="8_xuanzhuanpicture/thums/"+(i+1)+".jpg";
+        }
+        var x=(oContainer.offsetWidth-135*6)/7;
+        var y=(oContainer.offsetHeight-135*4)/5;
+
+        function loadScuess(){
+
+            for(var i=0;i<24;i++){
+                //oDiv.idx=i;
+                var oDiv = document.createElement('div');
+                oDiv.className='img';
+                oDiv.pos={
+                    row:Math.floor(i/6),
+                    col:i%6
+                };
+                oDiv.idx=i;
+                oDiv.style.background='url(8_xuanzhuanpicture/thums/'+(i+1)+'.jpg)';
+                oDiv.innerHTML='<span></span>';
+                oDiv.onclick=fn;
+                oContainer.appendChild(oDiv);
+            }
+
+            var aDiv = oContainer.getElementsByTagName('div');
+            var index=24;
+            var timer=setInterval(function () {
+                index--;
+
+                aDiv[index].style.left=aDiv[index].pos.col*135+(aDiv[index].pos.col+1)*x+'px';
+                aDiv[index].style.top=aDiv[index].pos.row*135+(aDiv[index].pos.row+1)*y+'px';
+                aDiv[index].style.transform='rotate('+(Math.random()*40-20) +'deg)';
+                if(index==0){
+                    clearInterval(timer);
+                }
+            },100);
+            var bFlag=true;
+            function fn(){
+                if(bFlag){
+                    var disX=(oContainer.offsetWidth-(127*6))/2;
+                    var disY=(oContainer.offsetHeight-(127*4))/2;
+                    for(var i=0;i<aDiv.length;i++){
+                        aDiv[i].style.left=aDiv[i].pos.col*127+disX+'px';
+                        aDiv[i].style.top=aDiv[i].pos.row*127+disY+'px';
+                        aDiv[i].style.WebkitTransform='rotate(0deg)';
+                        aDiv[i].style.border='1px solid #fff';
+                        var oSpan=aDiv[i].getElementsByTagName('span')[0];
+                        oSpan.style.opacity=1;
+                        var iLeft=- aDiv[i].pos.col*125;
+                        var iTop=-aDiv[i].pos.row*125;
+                        oSpan.style.background='url(8_xuanzhuanpicture/'+(this.idx+1)+'.jpg)  '+iLeft+'px '+iTop+'px';
+                        }
+                    }else{
+                    for(var i=0;i<aDiv.length;i++){
+                        aDiv[i].style.left=aDiv[i].pos.col*135+(aDiv[i].pos.col+1)*x+'px';
+                        aDiv[i].style.top=aDiv[i].pos.row*135+(aDiv[i].pos.row+1)*y+'px';
+                        aDiv[i].style.transform='rotate('+(Math.random()*40-20) +'deg)';
+                        aDiv[i].style.border='5px solid #fff';
+                        aDiv[i].getElementsByTagName('span')[0].style.opacity=0;
+                        }
+
+                }
+                bFlag=!bFlag;
+            }
+        }
+    </script>
+</body>
+</html>
