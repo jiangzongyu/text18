@@ -2,9 +2,144 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>1-1</title>
 </head>
-<body>
+<style>
+    #container{
+        width: 660px;
+        margin: 0 auto;
 
+    }
+    #container img{
+        width: 200px;
+        height: 150px;
+        margin: 10px;
+        float: left;
+    }
+    #container img.collide{
+        border: 1px solid red;
+    }
+</style>
+<body>
+    <div id="container">
+        <img src="picture/1.jpg" />
+        <img src="picture/2.jpg" />
+        <img src="picture/3.jpg" />
+        <img src="picture/4.jpg" />
+        <img src="picture/5.jpg" />
+        <img src="picture/6.jpg" />
+        <img src="picture/7.jpg" />
+        <img src="picture/8.jpg" />
+        <img src="picture/9.jpg" />
+    </div>
+    <script src="jslib.js"></script>
+    <script>
+        var oContainer = document.getElementById('container');
+        var aImg = oContainer.getElementsByTagName('img');
+        var zIndex = 3;
+        var collide = [];
+        var nearElem = null;
+        for(var i =0; i<aImg.length;i++){
+            aImg[i].style.left = aImg[i].offsetLeft + 'px';
+            aImg[i].style.top = aImg[i].offsetTop + 'px';
+        }
+        for(var i =0; i<aImg.length;i++){
+            aImg[i].style.position = 'absolute';
+            aImg[i].style.margin = 0;
+            drag(aImg[i]);
+            aImg[i].pos={
+                left:aImg[i].offsetLeft,
+                top:aImg[i].offsetTop
+            }
+        }
+        function drag(elem){
+            elem.onmousedown = function(e){
+                e = e || window.event;
+                var disX = e.clientX - elem.offsetLeft;
+                var disY = e.clientY - elem.offsetTop;
+
+                document.onmousemove = function(e){
+                    e = e || window.event;
+                    var ileft = e.clientX - disX;
+                    var itop = e.clientY - disY;
+                    elem.style.left = ileft + 'px';
+                    elem.style.top = itop + 'px';
+                    elem.style.zIndex = zIndex++;
+                    collide = [];
+
+                 for(var i =0; i<aImg.length;i++){
+                     if(aImg[i]  == elem ){
+                         continue;
+                     }
+                     var iscol = checkcollide(elem,aImg[i]);
+
+                     if(iscol){
+                         collide.push(aImg[i]);
+
+                     }
+//                     console.log(collide);
+                     aImg[i].className = '';
+                 }
+                    if(collide.length > 0){
+                        nearElem = nearest(elem);
+                        nearElem.className = 'collide';
+                    }else{
+                        nearElem= null;
+                    }
+                    return false;
+                };
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                   if(nearElem){
+                       animate(elem,nearElem.pos);
+                       animate(nearElem,elem.pos);
+                       var pos = nearElem.pos;
+                       nearElem.pos = elem.pos;
+                       elem.pos = pos;
+                       nearElem.className = '';
+                       nearElem = '';
+
+                   }else{
+                       animate(elem,elem.pos);
+                   }
+                };
+            };
+        }
+        function checkcollide(elem,tagart){
+            var elemL = elem.offsetLeft,
+                    elemR = elem.offsetLeft + elem.offsetWidth,
+                    elemT = elem.offsetTop,
+                    elemB = elem.offsetTop + elem.offsetHeight;
+            var tagartL = tagart.offsetLeft,
+                    tagartR = tagart.offsetLeft + tagart.offsetWidth,
+                    tagartT = tagart.offsetTop,
+                    tagartB = tagart.offsetTop + tagart.offsetHeight;
+            if(elemL > tagartR || elemR <tagartL || elemT > tagartB || elemB < tagartT){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        function nearest(elem){
+            var mindis = 9999999;
+            var index = -1;
+            for(var i = 0; i<collide.length; i++){
+                var x = elem.offsetLeft -collide[i].offsetLeft;
+                var y = collide[i].offsetTop - elem.offsetTop;
+                var dis = Math.sqrt(x*x+y*y);
+                if(dis<mindis){
+                    mindis = dis;
+                    index = i;
+                }
+
+            }
+
+            return collide[index];
+        }
+        document.onselectstart = function(){
+            return false;
+        };
+    </script>
 </body>
 </html>
