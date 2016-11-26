@@ -8,7 +8,6 @@
             margin: 0;
             padding: 0;
         }
-
         #small-img{
             width: 400px;
             height: 400px;
@@ -21,6 +20,9 @@
             overflow: hidden;
             float:left;
             display: none;
+        }
+        #big-pic{
+            position: relative;
         }
         #drag{
             width: 200px;
@@ -51,11 +53,10 @@
         oSmallImg.onmouseover = function(){
             oDrag.style.display = 'block';
             oBigImg.style.display = 'block';
-            oDrag.onmousemove = function(e){
+            oSmallImg.onmousemove = function(e){
                 e = e || window.event;
                 var disX = e.clientX - oDrag.offsetWidth/2;
                 var disY = e.clientY - oDrag.offsetHeight/2;
-
                 if(disX < 0){
                     disX = 0;
                 }else if(disX > oSmallImg.offsetWidth - oDrag.offsetWidth){
@@ -66,18 +67,15 @@
                 }else if(disY > oSmallImg.offsetHeight - oDrag.offsetHeight){
                     disY = oSmallImg.offsetHeight - oDrag.offsetHeight;
                 }
-
                 oDrag.style.left = disX + 'px';
                 oDrag.style.top = disY + 'px';
                 var iDisX = oDrag.offsetLeft/(oSmallImg.offsetWidth - oDrag.offsetWidth);
                 var maxX = iDisX * (oBigPic.offsetWidth - oBigImg.offsetWidth);
                 var iDisY = oDrag.offsetTop/(oSmallImg.offsetHeight - oDrag.offsetHeight);
-
                 var maxY = iDisY * (oBigPic.offsetHeight - oBigImg.offsetHeight);
-
                 oBigPic.style.left = -maxX +'px';
                 oBigPic.style.top = -maxY +'px';
-                console.log(oBigPic.style.left);
+
             };
         };
         oSmallImg.onmouseout  = function(){
