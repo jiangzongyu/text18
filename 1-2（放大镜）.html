@@ -82,7 +82,9 @@
             oDrag.style.display = 'none';
             oBigImg.style.display = 'none';
         };
-
+        document.onselectstart = function(){
+            return false;
+        }
     </script>
 </body>
 </html>
