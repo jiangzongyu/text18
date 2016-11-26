@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>1-3(选项卡)</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        #div1{
+            width: 400px;
+            height: 300px;
+            /*background: #cccccc;*/
+            margin: 100px auto;
+            overflow: hidden;
+        }
+        #div2 li{
+            width: 100px;
+            height: 30px;
+            background: black;
+            float: left;
+            margin-right: 5px;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+        }
+        #div3{
+            height: 270px;
+            background: #cccccc;
+            margin-top: 1px;
+        }
+        #div2{
+           overflow: hidden;
+        }
+        #div2 .selected{
+            background: red;
+        }
+        #div3 div{
+            display: none;
+        }
+        #div3 .selected{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <ul id="div2">
+            <li class="selected">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <div id="div3">
+            <div class="selected">123</div>
+            <div>456</div>
+            <div>789</div>
+        </div>
+
+    </div>
+<script>
+    var oDiv2 = document.getElementById('div2');
+    var aLi= oDiv2.getElementsByTagName('li');
+    var oDiv3= document.getElementById('div3');
+    var aDiv = oDiv3.getElementsByTagName('div');
+    for(var i = 0;i<aLi.length;i++){
+        aLi[i].index = i;
+        aLi[i].onclick = function(){
+            for(var i = 0;i<aLi.length;i++){
+                aLi[i].className = '';
+                aDiv[i].className = '';
+            }
+            this.className = 'selected';
+            aDiv[this.index].className = 'selected';
+        };
+    }
+</script>
+</body>
+</html>
