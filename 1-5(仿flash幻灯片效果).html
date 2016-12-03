@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        #container{
+            width: 400px;
+            margin: 100px auto;
+            position: relative;
+        }
+        #big-box{
+            position: relative;
+            width: 400px;
+            height: 320px;
+        }
+        #big-box li{
+            position: absolute;
+            left: 0;
+            top:0;
+            overflow: hidden;
+        }
+        #next,#prev{
+            width: 200px;
+            height: 320px;
+            /*background: red;*/
+            position: absolute;
+            top:0;
+            z-index: 99999999;
+            opacity: 0;
+            filter: alpha(opacity = 0);
+        }
+        #prev{
+            left: 0;
+        }
+        #next{
+            right: 0;
+        }
+        #prev-btn,#next-btn{
+            width: 60px;
+            height: 60px;
+            top: 50%;
+            margin-top: -30px;
+            position: absolute;
+            background-image: url("picture1/btn.gif");
+        }
+        #prev-btn{
+            left: 10px;
+        }
+        #next-btn{
+            right: 10px;
+            background-position: 0 -60px;
+        }
+        #txt-box{
+            width: 400px;
+            height: 30px;
+            background: black;
+            bottom: 0;
+            position: absolute;
+            line-height: 30px;
+            opacity: 0.6;
+            filter: alpha(opacity:60);
+            color: white;
+            z-index: 999999999;
+        }
+        #txt{
+            float: left;
+        }
+        #num{
+            float: right;
+        }
+        #small-box{
+            width: 400px;
+            height: 94px;
+            background: #cccccc;
+            padding: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        #small-box li{
+            float: left;
+            width: 120px;
+            height: 94px;
+            margin-left: 10px;
+            opacity: 0.6;
+            filter: alpha(opacity:60);
+
+        }
+        #small-box li img{
+            width: 120px;
+            height: 94px;
+
+        }
+        #small-img{
+            width: 800px;
+            position: absolute;
+            left:0;
+        }
+        #small-img li.selected{
+            opacity: 1;
+            filter:alpha(opacity = 100);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="big-box">
+            <ul>
+                <li  style="z-index: 1"><img src="picture1/1.jpg" alt="11111"/></li>
+                <li><img src="picture1/2.jpg" alt="22222"/></li>
+                <li><img src="picture1/3.jpg" alt="33333"/></li>
+                <li><img src="picture1/4.jpg" alt="44444"/></li>
+                <li><img src="picture1/5.jpg" alt="55555"/></li>
+                <li><img src="picture1/6.jpg" alt="66666"/></li>
+            </ul>
+            <div id="prev">
+                <span id="prev-btn"></span>
+            </div>
+            <div id="next">
+                <span id="next-btn"></span>
+            </div>
+            <div id="txt-box">
+                <span id="txt">11111</span>
+                <div id="num">
+                    <span id="i-num">1</span>/
+                    <span>6</span>
+                </div>
+            </div>
+        </div>
+        <div id="small-box">
+            <ul id="small-img">
+                <li class="selected"><img src="picture1/1.jpg"/></li>
+                <li><img src="picture1/2.jpg"/></li>
+                <li><img src="picture1/3.jpg"/></li>
+                <li><img src="picture1/4.jpg"/></li>
+                <li><img src="picture1/5.jpg"/></li>
+                <li><img src="picture1/6.jpg"/></li>
+            </ul>
+        </div>
+    </div>
+    <script src="jslib.js"></script>
+    <script>
+        var oNext = document.getElementById('next');
+        var oPrev = document.getElementById('prev');
+        var oPrevBtn = document.getElementById('prev-btn');
+        var oNextBtn = document.getElementById('next-btn');
+        var oBigBox = document.getElementById('big-box');
+        var aImg = oBigBox.getElementsByTagName('li');
+        var oTxt= document.getElementById('txt');
+        var oINum= document.getElementById('i-num');
+        var oSmallBox = document.getElementById('small-box');
+        var oSmallImg = document.getElementById('small-img');
+        var aSmallImg = oSmallImg.getElementsByTagName('li');
+        var iNow =0;
+        var zIndex = 1;
+        oNext.onmouseover = oPrev.onmouseover = function(){
+            animate(this,{opacity : 100});
+        };
+        oNext.onmouseout = oPrev.onmouseout = function(){
+            animate(this,{opacity : 0});
+        };
+        oPrevBtn.onclick = function(){
+            iNow--;
+            if(iNow == -1){
+                iNow = aImg.length-1 ;
+            }
+            changeImg(iNow);
+        };
+        oNextBtn.onclick = function(){
+            iNow++;
+            if(iNow == aImg.length){
+                iNow = 0;
+            }
+            changeImg(iNow);
+        };
+        function changeImg(idx){
+           var txt = aImg[idx].getElementsByTagName('img')[0].alt;
+            aImg[idx].style.zIndex = ++zIndex;
+            aImg[idx].style.height = 0;
+            oTxt.innerHTML = txt ;
+            oINum.innerHTML = idx+1;
+            animate(aImg[idx],{height:320});
+            for(var i=0;i<aSmallImg.length;i++){
+                aSmallImg[i].className = '';
+            }
+            aSmallImg[idx].className = 'selected';
+            if(idx == 0){
+                animate(oSmallImg,{
+                    left:0
+                });
+            }else if(idx == aSmallImg.length-1){
+                animate(oSmallImg,{
+                    left:-(idx-2)*(aSmallImg[0].offsetWidth+10)
+                });
+            }else{
+                animate(oSmallImg,{
+                    left:-(idx-1)*(aSmallImg[0].offsetWidth+10)
+                })
+            }
+        }
+
+        for(var i=0;i<aSmallImg.length;i++){
+            aSmallImg[i].index = i;
+            aSmallImg[i].onmouseover = function(){
+             // if(this.index != iNow){
+                    this.className = 'selected';
+               // }
+            };
+            aSmallImg[i].onmouseout = function(){
+            if(this.index != iNow){
+                    this.className ='';
+                }
+            };
+            aSmallImg[i].onclick = function(){
+                iNow = this.index;
+                changeImg(this.index);
+            };
+        }
+
+    </script>
+</body>
+</html>
