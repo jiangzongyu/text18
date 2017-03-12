@@ -1,0 +1,184 @@
+body{
+  margin-top:35px;
+  text-align:center;
+}
+
+h3, p{
+  padding:20px;
+}
+
+.container{
+  width:960px;
+  margin:0 auto;
+}
+
+img{
+  width: 100%;
+  max-width: 100%;
+}
+
+#showcase{
+  /*background: url("../img/1.jpg") 50% 50% no-repeat;*/
+  background-image: url("../img/1.jpg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  -webkit-background-size: 100%;
+  background-size: cover;
+  /*height: 500px;*/
+  padding-top: 50%;
+  margin-bottom: 20px;
+}
+
+#header, #navigation, #footer, #mainbody, #sidebar{
+  height:100px;
+  line-height:25px;
+  background:#eee;
+  margin-bottom:20px;
+}
+
+#mainbody, #sidebar{
+  height:300px;
+  float:left;
+}
+#mainbody {
+  width:620px;
+  margin-right:20px;
+  background:#ddefcb;
+}
+#sidebar{
+  width:320px;
+  background:#ffcbdd;
+}
+#footer{
+  clear:both;
+}
+
+/*导航菜单*/
+ul{
+  list-style: none;   
+  padding: 0;
+}
+
+#nav li, #nav li a{
+  display: inline-block;
+  padding: 7px 15px;
+  text-decoration: none;
+  color: #3b3b3b;
+}
+
+#nav li a:hover{
+  background: #eee;
+}
+
+#nav .active{
+  background: #eee;
+}
+
+.toggle-btn{
+  display: none;
+}
+
+@media ( min-width: 1200px ){
+  .container{
+    width: 1170px;
+  }
+  #mainbody{
+    width: 770px;
+    margin-right: 30px;
+  }
+  #sidebar{
+    width: 370px;
+  }
+}
+
+@media ( max-width: 959px){
+  .container{
+    width: 100%;
+  }
+  #mainbody{
+    width: 67%;
+    margin-right: 3%;
+  }
+  #sidebar{
+    width: 30%;
+    float: right;
+  }
+}
+@media(max-width: 767px){
+  #mainbody,#sidebar{
+    float: none;
+    width: 100%;
+  }
+
+  /*切换按钮*/
+  .toggle-btn{
+    display: inline-block;
+    font-size: 25px;
+    text-decoration: none;
+    background: #000;
+    color: #fff;
+    padding: 7px 10px;
+    position: absolute;
+    right: 10px;
+    top: 50px;
+  }
+
+  /*隐藏关闭按钮*/
+  #nav .close{
+    display: none;
+  }
+
+  /*导航为目标的状态的时候显示关闭按钮*/
+  #nav:target .close{
+    display: inline-block;
+  }
+
+  /*初始隐藏导航*/
+  #nav{
+    display: none;
+  }
+
+  /*导航为目标状态的时候的样式*/
+  #nav:target{
+    display: block;
+    position: absolute;
+    top: 0;
+    padding-top: 70px;
+    width: 100%;
+  }
+
+  /*目标状态下的导航的 UL标题*/
+  #nav:target ul{
+    background: #000;
+  }
+
+  /*目标状态下的导航的 li 与a*/
+  #nav:target li, #nav:target li a{
+    display: block;
+    color: #eee;
+    text-align: left;
+  }
+
+  /*目标状态下的导航的列表下的a 标签的悬停样式*/
+  #nav:target li a:hover{
+    background: #3b3b3b;
+  }
+
+  /*目标状态下导航的激活状态的样式*/
+  #nav:target .active{
+    background: #272727;
+  }
+}
+
+
+@media(max-width: 480px){
+  #showcase{
+    background-image: url("../img/2.jpg");
+  }
+}
+
+@media(max-width: 480px)and(min-resolution:2dppx),(max-width: 480px) and(-webkit-min-device-pixel-ratio:2){
+  #showcase{
+    background-image: url("../img/3.jpg");
+  }
+}
