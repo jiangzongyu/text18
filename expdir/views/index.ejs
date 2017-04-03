@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    
+    <!-- <p><%=data.CITY%></p> -->
+    <%data.forEach(function(result,index){%>
+    	<li>name: <%=result.NAME%></li>
+    	<li>city: <%=result.CITY%></li>
+    <%})%>
+  </body>
+</html>

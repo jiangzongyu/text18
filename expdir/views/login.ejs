@@ -1,0 +1,24 @@
+<script src="javascripts/jq.js"></script>
+<meta charset="utf-8">
+<form action="/login" method="post">
+用户名：<input type="text" name = "username" id="name1"></br>
+密码：<input type="password" name = "password"></br>
+<input type="submit" name = "sub" value="Go">
+<input type="reset" name = "res" value="Back">
+</form>
+
+<script>
+
+/*
+	$(function(){
+		$('#name1').blur(function(){
+			$.post( '/xxlogin','name=' + this.value,function(data){
+				if(data == "success"){
+					console.log('123');
+				}else{
+					console.log('456');
+				}
+			} ,'text');
+		});
+	});*/
+</script>
