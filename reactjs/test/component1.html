@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="react.js"></script>
+<script src="react-dom.js"></script>
+<script src="browser.js"></script>
+<div id="container"></div>
+<script type="text/babel">
+    var Subbox = React.createClass({
+        render: function () {
+            return(
+                    <h1>嵌套</h1>
+            )
+        }
+    })
+    var Meassagebox = React.createClass({
+        render: function () {
+            return(
+                    <div>
+                        <Subbox/>
+                        <h1>hello component</h1>
+                    </div>
+
+            );
+
+        }
+    });
+    ReactDOM.render(
+    <Meassagebox/>,
+            document.getElementById('container')
+    )
+</script>
+</body>
+</html>
