@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function fn(a, b){
+        console.log(this);
+        console.log( a + b);
+    }
+
+    var obj = {
+        name : "zhangsan",
+        age : 20
+    };
+    /* call,apply,bind改变档当前this的指向。bind不会马上执行，后面加个（）则会马上执行*/
+    //        fn(2, 3);
+    //        fn.call(obj, 2, 3);
+    //        fn.apply(obj, [2, 3]);
+    fn.bind(obj, 2, 3)();
+</script>
+</body>
+</html>

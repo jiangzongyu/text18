@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="container"></div>
+<script src="react.js"></script>
+<script src="react-dom.js"></script>
+<script src="browser.js"></script>
+<script type="text/babel">
+    var Component = React.createClass({
+        render: function () {
+            return(
+                <h1>xixixi</h1>
+            );
+        }
+    });
+
+    var Input=React.createClass({
+        componentDidMount: function () {
+            var InputDOM = this.refs.username;
+            InputDOM.focus();
+            console.log(ReactDOM.findDOMNode(this.refs.component));
+        },
+        render: function () {
+            return(
+                    <div>
+                        <input type="text" ref="username"/>
+                        <Component ref="component" />
+                    </div>
+            );
+        }
+    });
+
+    ReactDOM.render(
+    <Input/>,
+            document.getElementById('container')
+    )
+</script>
+</body>
+</html>
