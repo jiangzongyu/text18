@@ -22,10 +22,15 @@ router.post('/login',function(req,res,next){
 
 router.get('/login',cuser.login);
 
-router.post('/login',cuser.dologin)
+router.post('/login',cuser.dologin);
 
-router.post('/xxlogin',cuser.xxlogin);
+router.get('/index',cblog.index);
 
-router.get('/index',cuser.index);
+router.get('/reg',cblog.reg);
+
+router.post('/reg',cblog.doreg);
+
+router.get('/login',cblog.login);
+
 
 module.exports = router;
