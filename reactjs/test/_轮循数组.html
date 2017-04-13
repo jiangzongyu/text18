@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.js"></script>
+    <script type="text/babel">
+        var Subcomponent = React.createClass({
+            getDefaultProps : function () {
+                return {
+                    arr: []
+                };
+            },
+            render : function () {
+                var msg = [];
+                this.props.arr.forEach(function(value,index){
+                    msg.push(<h1 key={index}>{value}</h1>)
+                });
+                return(
+                   <div>{msg}</div>
+                );
+            }
+        });
+        var Component = React.createClass({
+            render : function () {
+                var arr = [1,2,3];
+                return(
+                    <Subcomponent arr={arr}/>
+                );
+            }
+        });
+        var Component1 = React.createClass({
+            render : function () {
+                return(
+                        <Subcomponent/>
+                );
+            }
+        });
+        ReactDOM.render(
+            <div>
+                <Component/>
+                <Component1/>
+            </div>,
+            document.getElementById('container')
+        )
+    </script>
+</body>
+</html>
