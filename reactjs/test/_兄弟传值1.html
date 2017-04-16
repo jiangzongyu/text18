@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.js"></script>
+    <script src="PubSub.js"></script>
+    <script type="text/babel">
+        var Component1 = React.createClass({
+            handleChange : function (e) {
+                PubSub.publish('xx',{
+                    val:e.target.value
+                });
+            },
+            render :　function () {
+                return(
+                        <select onChange={this.handleChange}>
+                            <option>姜</option>
+                            <option>宗</option>
+                            <option>禹</option>
+                        </select>
+                );
+            }
+        });
+        var Component2 = React.createClass({
+            getInitialState :function () {
+                return{
+                    name : ""
+                }
+            },
+            componentWillMount : function () {
+                PubSub.subscribe('xx',function (msg,data) {
+                    this.setState({
+                        name: data.val
+                    })
+                }.bind(this))
+            },
+            render : function () {
+                return(
+                    <h1>{this.state.name}</h1>
+                )
+            }
+        });
+        ReactDOM.render(
+                <div>
+                    <Component1/>
+                    <Component2/>
+                </div>,
+            document.getElementById('container')
+        )
+    </script>
+</body>
+</html>

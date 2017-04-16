@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.js"></script>
+    <script type="text/babel">
+        var Sub = React.createClass({
+            render : function () {
+                return(
+                    <h1>jiang</h1>
+                )
+            }
+        });
+        var Sub1 = React.createClass({
+            render : function () {
+                return(
+                    <h1>{this.props.str}</h1>
+                )
+            }
+        });
+        var One = React.createClass({
+            render : function () {
+                var str = 'zong';
+                return(
+                        <div>
+                            <Sub/>
+                            <Sub1 str={str}/>
+                        </div>
+                )
+            }
+        });
+        ReactDOM.render(
+            <One/>,
+            document.getElementById('container')
+        )
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.js"></script>
+    <div id="container"></div>
+    <script type="text/babel">
+        var Subcomponent = React.createClass({
+            getDefaultProps : function () {
+                return{
+                    arr : []
+                };
+            },
+            handleChange : function (e) {
+                this.props.change(e.target.checked);
+//                console.log(this.props.change(e.target.checked));
+
+            },
+            render : function () {
+                var arr1=[];
+                this.props.arr.forEach(function (value,index) {
+                    arr1.push(<label key={index}>{value}<input type="checkbox" onChange={this.handleChange}/></label>);
+                }.bind(this));
+                return(
+                        <div>
+                            {arr1}
+                        </div>
+                );
+            }
+        });
+        var Component = React.createClass({
+            getInitialState : function () {
+                return{
+                    count : 0
+                };
+            },
+            change : function (checked) {
+                this.setState({
+                    count : checked ? this.state.count + 1:this.state.count - 1
+                });
+            },
+            render : function () {
+                var arr=['百度','阿里','腾讯'];
+                return(
+                    <div>
+                        <h1>选择的公司个数：{this.state.count}</h1>
+                        <Subcomponent arr={arr} change={this.change}/>
+                    </div>
+                );
+            }
+        });
+        ReactDOM.render(
+            <Component/>,
+            document.getElementById('container')
+        )
+    </script>
+</body>
+</html>
