@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <button @click="fn">click</button>
+    <div v-text="count"></div>
+</div>
+<script src="vue.js"></script>
+<script>
+    var vm = new Vue({
+        el : "#app",
+        data:{
+            count:0
+        },
+        methods:{
+            fn : function () {
+                return{
+                    count : this.count++
+                }
+//                return  this.count++
+
+            }
+        }
+    });
+</script>
+</body>
+</html>

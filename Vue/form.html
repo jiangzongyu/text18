@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="checkbox"  @click="fn"/>
+        <div class='show' :class="{hide:isShow}">
+            <ul>
+                <li v-for="(val,index) in arr">{{val}}<input type="checkbox"  @click="fn(index+1)"/></li>
+                <!--1<input type="checkbox"  @click="fn1" />-->
+                    <!--2<input type="checkbox"  @click="fn2"/>-->
+                    <!--3<input type="checkbox"  @click="fn3"/>-->
+                    <!--{{val.name}},{{val.age}}-->
+                <!--<li v-for="val in arr">{{val}}<input type="checkbox" v-model="bb" /></li>-->
+
+                    <!--<button @click="del(index)">del</button>-->
+                <!--</li>-->
+            </ul>
+        </div>
+
+            <li>1</li>
+            <!--<li v-for="val in arr">{{val}}<input type="checkbox"  /></li>-->
+            <div class='show' :class="{hide:b}">
+                jaing
+            </div>
+            <div class='show' :class="{hide:c}">
+
+                zong
+            </div>
+            <div class='show' :class="{hide:d}">
+
+                yu
+            </div>
+        </div>
+    <script src="vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                aa:false,
+                bb:false,
+                cc:false,
+                dd:false,
+                isShow:true,
+                b:true,
+                c:true,
+                d:true,
+                arr:[1,2,3]
+            },
+            methods:{
+                fn: function () {
+//                    console.log(123);
+                    return this.isShow = !this.isShow;
+                },
+                fn1:function(){
+                    return this.b = !this.b;
+
+                },
+
+                fn2:function(){
+                    return this.c = !this.c;
+                },
+                fn3: function () {
+                    return this.d = !this.d;
+                }
+            },
+
+
+            })
+    </script>
+</body>
+</html>
