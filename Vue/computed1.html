@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        {{firstName}}+{{lastName}}={{fullName}}
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                firstName:'zhang',
+                lastName:'san',
+                fullName:'zhang san'
+            },
+//            methods:{
+//                getFullName:function () {
+//                    return this.firstName + " " + this.lastName;
+//
+//                }
+//            }
+            computed:{
+
+            }
+        })
+    </script>
+</body>
+</html>
