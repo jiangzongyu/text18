@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .show{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    是否购买设施:<input type="checkbox" name="name" @click="fn">
+
+        <div :class="{show:isTrue}">
+            <ul>
+                <li v-for="(val,index) in arr">{{index}},{{val}}
+                    <input type="checkbox" value="val">
+
+                </li>
+            </ul>
+            总价：
+        </div>
+
+
+</div>
+<script src="vue.js"></script>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            name:'',
+            isTrue:true,
+            check:[],
+            arr:{"床":100,"冰箱":200,"沙发":300}
+        },
+        methods:{
+            fn:function () {
+                return this.isTrue = ! this.isTrue;
+            }
+        }
+    })
+</script>
+</body>
+</html>
