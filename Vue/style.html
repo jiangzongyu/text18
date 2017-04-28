@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .red{
+            background:red;
+            width: 100px;
+            height: 100px;
+        }
+        .show{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="fn">click</button>
+        <div :class="{red:isRed,show:isTrue}"></div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                isRed:true,
+                isTrue:false
+
+            },
+            methods:{
+                fn: function () {
+                    this.isTrue = !this.isTrue;
+
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
